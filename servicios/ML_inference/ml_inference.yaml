@@ -1,0 +1,23 @@
+functions:
+  oscar:
+    - oscar-cluster:
+        name: mls-service
+        memory: 2Gi
+        cpu: '2'
+        image: ghcr.io/grycap/mls-arm-api
+        script: script.sh
+        log_level: INFO
+        input:
+          - storage_provider: minio
+            path: upload/input
+        output:
+          - storage_provider: minio
+            path: mls/output
+storage_providers:
+  minio:
+    minio:
+      endpoint: 'https://minio.graspi.im.grycap.net'
+      region: us-east-1
+      access_key: minio
+      secret_key: minio-aisprint-2021
+      verify: false
